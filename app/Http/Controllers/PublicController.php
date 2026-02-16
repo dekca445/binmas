@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    public function index()
-    {
-        return view('pages.home');
-    }
+    // Di dalam method index() pada PublicController
+public function index()
+{
+    // Ambil 3 berita terbaru untuk section "Kilas Berita"
+    // Jika tabel posts belum ada/kosong, ini akan mengembalikan collection kosong
+    $recentPosts = \App\Models\Post::latest()->take(3)->get();
+
+    return view('pages.home', compact('recentPosts'));
+}
 
     public function profil()
     {
@@ -32,4 +37,8 @@ class PublicController extends Controller
     {
         return view('pages.kontak');
     }
+    public function sambutan()
+{
+    return view('pages.sambutan');
+}
 }

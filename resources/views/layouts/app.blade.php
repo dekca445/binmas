@@ -18,12 +18,19 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0a1f43",
-                        "primary-dark": "#051126",
-                        "accent": "#f4c430", // Kuning Emas
-                        "accent-gold": "#C5A059", // Variasi Emas
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#111721",
+                        // Biru Navy yang lebih "Deep" dan Modern
+                        "primary": "#0D1B3E",
+                        "primary-dark": "#060D1F",
+
+                        // Kuning Emas yang lebih hidup (Vibrant Gold)
+                        "accent": "#FFD700",
+
+                        // Emas Meredup (Muted Gold) untuk elemen sekunder
+                        "accent-gold": "#C5A059",
+
+                        // Background yang tidak putih polos (agar mata tidak cepat lelah)
+                        "background-light": "#F8F9FA",
+                        "background-dark": "#0B1221",
                     },
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
@@ -32,11 +39,20 @@
             },
         }
     </script>
+
     <style>
+        /* Gradasi Emas yang lebih mewah (dari Emas gelap ke Emas terang) */
         .gold-gradient-text {
-            background: linear-gradient(to right, #f4c430, #ffdb58);
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /* Tambahan: Gradasi Biru untuk background section agar tidak flat */
+        .blue-gradient-bg {
+            background: linear-gradient(135deg, #0D1B3E 0%, #060D1F 100%);
         }
     </style>
 </head>
@@ -49,9 +65,10 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex items-center space-x-4">
                     <div class="flex-shrink-0">
-                        <div
-                            class="h-10 w-10 bg-white/10 rounded-full flex items-center justify-center border-2 border-accent">
-                            <span class="material-icons text-accent">local_police</span>
+                        <div class="h-16 w-16 flex items-center justify-center">
+                            <img src="{{ asset('images/logo-binmas.png') }}" alt="Logo Binmas"
+                                class="h-full w-full object-contain p-1">
+                            {{-- <span class="material-icons text-accent">local_police</span> --}}
                         </div>
                     </div>
                     <div class="hidden md:block">
@@ -73,33 +90,40 @@
                                 class="text-gray-300 group-hover:text-white px-3 py-2 text-sm font-medium inline-flex items-center transition-colors">
                                 Satuan Fungsi <span class="material-icons text-sm ml-1">expand_more</span>
                             </button>
-                            <div
-                                class="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 hidden group-hover:block z-50 animate-fade-in-down border-t-4 border-accent">
-                                <a href="{{ route('satuan-fungsi', 'bag-binopsnal') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Bag
-                                    Binopsnal</a>
-                                <a href="{{ route('satuan-fungsi', 'subdit-binpolmas') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-                                    Binpolmas</a>
-                                <a href="{{ route('satuan-fungsi', 'subdit-binsatpam-polsus') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-                                    Binsatpam/Polsus</a>
-                                <a href="{{ route('satuan-fungsi', 'subdit-bintibsos') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-                                    Bintibsos</a>
-                                <a href="{{ route('satuan-fungsi', 'subdit-bhabinkamtibmas') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-                                    Bhabinkamtibmas</a>
-                                <a href="{{ route('satuan-fungsi', 'subbag-renmin') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subbag
-                                    Renmin</a>
-                            </div>
+                            <div class="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 hidden group-hover:block z-50 animate-fade-in-down border-t-4 border-accent">
+    {{-- Ubah 'satuan-fungsi' menjadi 'satker.show' --}}
+    <a href="{{ route('satker.show', 'bag-binopsnal') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Bag
+        Binopsnal</a>
+    <a href="{{ route('satker.show', 'subdit-binpolmas') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
+        Binpolmas</a>
+    <a href="{{ route('satker.show', 'subdit-binsatpam-polsus') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
+        Binsatpam/Polsus</a>
+    <a href="{{ route('satker.show', 'subdit-bintibsos') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
+        Bintibsos</a>
+    <a href="{{ route('satker.show', 'subdit-bhabinkamtibmas') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
+        Bhabinkamtibmas</a>
+    <a href="{{ route('satker.show', 'subbag-renmin') }}"
+        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subbag
+        Renmin</a>
+</div>
                         </div>
 
-                        <a href="{{ route('berita') }}"
-                            class="{{ request()->routeIs('berita') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">Berita</a>
-                        <a href="{{ route('kontak') }}"
-                            class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">Kontak</a>
+                        {{-- Baris 116 --}}
+<a href="{{ route('berita.index') }}"
+   class="{{ request()->routeIs('berita.index') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
+   Berita
+</a>
+
+{{-- Baris 118 --}}
+<a href="{{ route('kontak') }}"
+   class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
+   Kontak
+</a>
                     </div>
                 </div>
 
@@ -121,9 +145,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="material-icons text-accent text-3xl">local_police</span>
-                        <span class="font-bold text-xl tracking-wider">DITBINMAS POLDA NTB</span>
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="flex-shrink-0">
+                            <img src="{{ asset('images/logo-binmas.png') }}" alt="Logo Binmas"
+                                class="h-12 w-auto object-contain">
+                        </div>
+                        <span class="font-bold text-xl tracking-wider text-white">DITBINMAS POLDA NTB</span>
                     </div>
                     <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
                         Mewujudkan keamanan yang kondusif untuk masyarakat produktif. Melayani dengan hati nurani,
