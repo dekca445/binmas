@@ -37,11 +37,11 @@
             {{-- Filter Kategori --}}
             <div class="md:w-1/4 relative border-b md:border-b-0 md:border-r border-gray-200">
                 <span class="absolute left-3 top-3.5 material-icons text-gray-400">category</span>
-                <select name="kategori" class="w-full pl-10 pr-4 py-3 bg-transparent outline-none text-gray-700 font-medium appearance-none cursor-pointer focus:bg-gray-50 rounded-xl transition">
+                <select name="category" class="w-full pl-10 pr-4 py-3 bg-transparent outline-none text-gray-700 font-medium appearance-none cursor-pointer focus:bg-gray-50 rounded-xl transition">
                     <option value="">Semua Kategori</option>
-                    <option value="Giat Binmas" {{ request('kategori') == 'Giat Binmas' ? 'selected' : '' }}>Giat Binmas</option>
-                    <option value="Himbauan" {{ request('kategori') == 'Himbauan' ? 'selected' : '' }}>Himbauan</option>
-                    <option value="Satpam" {{ request('kategori') == 'Satpam' ? 'selected' : '' }}>Satpam & Polsus</option>
+                    @foreach(\App\Models\Post::distinct()->pluck('category')->filter() as $cat)
+                        <option value="{{ $cat }}" {{ request('category') == $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -77,14 +77,14 @@
                         {{-- Badge Kategori --}}
                         <div class="absolute top-4 left-4 z-10">
                             <span class="px-3 py-1.5 bg-white/90 backdrop-blur-md text-blue-800 text-[10px] font-bold uppercase tracking-widest rounded-lg shadow-sm">
-                                {{ $post->kategori }}
+                                {{ $post->category }}
                             </span>
                         </div>
 
                         {{-- Link Wrapper Gambar --}}
                         <a href="{{ route('berita.show', $post->slug ?? '#') }}" class="block h-full">
-                            @if($post->gambar)
-                                <img src="{{ asset('storage/' . $post->gambar) }}" alt="{{ $post->judul }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                            @if($post->thumbnail)
+                                <img src="{{ asset('storage/' . $post->thumbnail) }}" alt="{{ $post->title }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             @else
                                 <img src="https://source.unsplash.com/800x600/?police,security&sig={{ $post->id }}" alt="Default" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
                             @endif
@@ -104,20 +104,20 @@
                             <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
                             <span class="flex items-center gap-1">
                                 <span class="material-icons text-[14px] text-blue-500">person</span>
-                                {{ $post->penulis }}
+                                {{ $post->author }}
                             </span>
                         </div>
 
                         {{-- Judul --}}
                         <h2 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-blue-700 transition-colors line-clamp-2">
                             <a href="{{ route('berita.show', $post->slug ?? '#') }}">
-                                {{ $post->judul }}
+                                {{ $post->title }}
                             </a>
                         </h2>
 
                         {{-- Ringkasan --}}
                         <p class="text-gray-500 text-sm line-clamp-3 mb-6 leading-relaxed flex-grow">
-                            {{ $post->ringkasan }}
+                            {{ $post->excerpt }}
                         </p>
 
                         {{-- Tombol Baca --}}
@@ -167,7 +167,7 @@
                         </span>
                         <div>
                             <h4 class="text-sm font-bold text-gray-800 leading-snug group-hover:text-blue-700 transition-colors line-clamp-2">
-                                {{ $pop->judul }}
+                                {{ $pop->title }}
                             </h4>
                             <span class="text-[10px] text-gray-400 mt-1 block">
                                 {{ $pop->created_at->diffForHumans() }}
@@ -186,9 +186,11 @@
                 </div>
                 
                 <nav class="space-y-1">
-                    @php $kategoris = ['Giat Binmas', 'Himbauan', 'Satpam & Polsus', 'Bhabinkamtibmas', 'Edukasi']; @endphp
+                    @php 
+                        $kategoris = \App\Models\Post::distinct()->pluck('category')->filter(); 
+                    @endphp
                     @foreach($kategoris as $cat)
-                    <a href="/berita?kategori={{ $cat }}" class="flex justify-between items-center px-3 py-2 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition group">
+                    <a href="{{ route('berita.index', ['kategori' => $cat]) }}" class="flex justify-between items-center px-3 py-2 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition group">
                         <span class="text-sm font-medium">{{ $cat }}</span>
                         <span class="material-icons text-xs text-gray-300 group-hover:text-blue-500">arrow_forward_ios</span>
                     </a>
@@ -203,12 +205,17 @@
                     <h3 class="font-bold text-gray-800 text-lg uppercase tracking-tight">Topik Populer</h3>
                 </div>
                 <div class="flex flex-wrap gap-2">
-                    @php $tags = ['Narkoba', 'Lalu Lintas', 'Pos Kamling', 'Jumat Curhat', 'Vaksinasi', 'Hoax', 'Pilurada']; @endphp
-                    @foreach($tags as $tag)
-                        <a href="/berita?search={{ $tag }}" class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full hover:bg-blue-600 hover:text-white transition">
+                    @php 
+                        $allTags = \App\Models\Post::pluck('tags')->flatten()->unique()->filter()->take(15);
+                    @endphp
+                    @foreach($allTags as $tag)
+                        <a href="{{ route('berita.index', ['search' => $tag]) }}" class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-bold rounded-full hover:bg-blue-600 hover:text-white transition">
                             #{{ $tag }}
                         </a>
                     @endforeach
+                    @if($allTags->isEmpty())
+                        <p class="text-xs text-gray-400">Belum ada topik.</p>
+                    @endif
                 </div>
             </div>
 

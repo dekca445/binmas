@@ -28,16 +28,32 @@ class OfficialResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Data Personil')
                     ->schema([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('rank')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('position')
+                            ->label('Jabatan')
+                            ->required()
+                            ->maxLength(255),
+
                         // 1. UNIT KERJA (Pemicu Filter)
                         Forms\Components\Select::make('unit')
-                            ->label('Satuan Fungsi / Unit')
-                            ->options(function () {
-                                $satkers = \App\Models\Satker::pluck('name', 'name')->toArray();
-                                $pimpinan = ['Pimpinan' => 'Pimpinan Utama (Kapolda/Dir/Wadir)'];
-                                return $pimpinan + $satkers;
-                            })
+                            ->label('Satuan Unit (Opsional)')
+                            ->options([
+                                'Subdit Binpolmas' => 'Subdit Binpolmas',
+                                'Subdit Bintibsos' => 'Subdit Bintibsos',
+                                'Subdit Bhabinkamtibmas' => 'Subdit Bhabinkamtibmas',
+                                'Subdit Satpam/Pola' => 'Subdit Satpam/Pola',
+                                'Subbag Renmin' => 'Subbag Renmin',
+                                'Bag Binopsnal' => 'Bag Binopsnal',
+                            ])
+                            ->placeholder('Pilih Unit jika pejabat ini milik Satfungsi tertentu')
                             ->searchable()
-                            ->required()
                             ->live() // 👈 PENTING: Agar saat diganti, field lain ikut update
                             ->afterStateUpdated(fn(Set $set) => $set('parent_id', null)), // Reset atasan jika unit ganti
 

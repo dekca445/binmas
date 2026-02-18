@@ -23,5 +23,6 @@ Route::controller(PublicController::class)->group(function () {
     Route::get('/profil', 'profil')->name('profil');
     // Route::get('/berita', 'berita')->name('berita');
     Route::get('/kontak', 'kontak')->name('kontak');
+    Route::get('/galeri', 'galeri')->name('galeri');
 });
 Route::get('/satker/{slug}', [SatkerController::class, 'show'])->name('satker.show');

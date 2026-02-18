@@ -11,19 +11,22 @@ class Post extends Model
     protected $guarded = [];
 
 
-
+    protected $casts = [
+        'tags' => 'array',
+        'is_published' => 'boolean',
+    ];
     // Fitur pencarian (Scope)
     public function scopeFilter($query, array $filters)
     {
         // Jika ada pencarian
         if($filters['search'] ?? false) {
-            $query->where('judul', 'like', '%' . $filters['search'] . '%')
-                  ->orWhere('isi', 'like', '%' . $filters['search'] . '%');
+            $query->where('title', 'like', '%' . $filters['search'] . '%')
+                  ->orWhere('content', 'like', '%' . $filters['search'] . '%');
         }
         
         // Jika ada filter kategori (opsional)
-        if($filters['kategori'] ?? false) {
-            $query->where('kategori', $filters['kategori']);
+        if($filters['category'] ?? false) {
+            $query->where('category', $filters['category']);
         }
     }
 }

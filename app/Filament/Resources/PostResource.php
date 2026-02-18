@@ -56,7 +56,29 @@ class PostResource extends Resource
                 FileUpload::make('thumbnail')
                     ->directory('posts') // Folder penyimpanan
                     ->image()
-                    ->imageEditor(),
+                    ->imageEditor()
+                    ->maxSize(51200), // 50MB
+
+                Forms\Components\TagsInput::make('tags')
+                    ->separator(',')
+                    ->suggestions([
+                        'Giat Binmas',
+                        'Penyuluhan',
+                        'Sambang',
+                        'Himbauan',
+                        'Kamtibmas',
+                        'Narkoba',
+                        'Lalu Lintas',
+                    ]),
+
+                Forms\Components\Textarea::make('quote')
+                    ->rows(3)
+                    ->columnSpanFull()
+                    ->placeholder('Kutipan penting dari berita ini...'),
+
+                TextInput::make('author')
+                    ->label('Penulis')
+                    ->default(fn () => auth()->user()->name ?? 'Admin Binmas'),
 
                 RichEditor::make('content')
                     ->columnSpanFull(), // Agar lebar penuh

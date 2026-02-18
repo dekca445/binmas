@@ -183,8 +183,8 @@
                 @foreach($recentPosts as $item)
                 <article class="group bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
                     <div class="relative h-52 overflow-hidden shrink-0">
-                        @if($item->image)
-                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @if($item->thumbnail)
+                            <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         @else
                             <img src="https://source.unsplash.com/800x600/?police,security&sig={{ $loop->iteration }}" alt="Berita" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                         @endif
@@ -223,37 +223,61 @@
 {{-- 6. GALERI KEGIATAN --}}
 <section class="py-20 bg-gray-50 dark:bg-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-black text-gray-800 dark:text-white uppercase">Galeri Kegiatan</h2>
-            <p class="text-gray-500 mt-2">Dokumentasi visual kegiatan Ditbinmas di lapangan.</p>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-black text-gray-800 dark:text-white uppercase">Galeri Kegiatan</h2>
+                <p class="text-gray-500 mt-2">Dokumentasi visual kegiatan Ditbinmas di lapangan.</p>
+            </div>
+            <a href="{{ route('galeri') }}" class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-gray-200 text-gray-600 text-sm font-bold hover:border-primary hover:text-primary transition-colors">
+                Lihat Semua <span class="material-icons text-sm">arrow_forward</span>
+            </a>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 h-[500px]">
-            <div class="md:col-span-2 md:row-span-2 relative rounded-2xl overflow-hidden group shadow-lg">
-                <img src="https://source.unsplash.com/800x800/?police,officer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-75 group-hover:brightness-100">
-                <a href="#" class="absolute inset-0 flex items-center justify-center z-10">
-                    <div class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-accent transition-colors shadow-xl">
-                        <span class="material-icons text-4xl text-white">play_arrow</span>
-                    </div>
-                </a>
-                <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/80 to-transparent w-full">
-                    <p class="text-white font-bold text-lg">Video Profil Ditbinmas</p>
-                    <p class="text-white/70 text-sm">Tonton selengkapnya</p>
+            @php
+                // Kita ambil item pertama sebagai 'Highlight' (besar)
+                $highlight = $galleries->first();
+                $others = $galleries->skip(1);
+            @endphp
+
+            @if($highlight)
+            <div class="md:col-span-2 md:row-span-2 relative rounded-2xl overflow-hidden group shadow-lg bg-gray-200">
+                @if($highlight->type === 'video')
+                    <video src="{{ asset('storage/' . $highlight->file) }}" class="w-full h-full object-cover" controls></video>
+                @else
+                    <img src="{{ asset('storage/' . $highlight->file) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                @endif
+                
+                <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/80 to-transparent w-full pointer-events-none">
+                    <p class="text-white font-bold text-lg">{{ $highlight->title }}</p>
+                    <p class="text-white/70 text-sm line-clamp-1">{{ $highlight->description }}</p>
                 </div>
             </div>
+            @else
+                <div class="md:col-span-4 flex items-center justify-center h-full text-gray-400 italic">
+                    Belum ada galeri.
+                </div>
+            @endif
             
-            <div class="relative rounded-2xl overflow-hidden group shadow-md">
-                <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition z-10"></div>
-                <img src="https://source.unsplash.com/400x400/?meeting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            @foreach($others as $item)
+            <div class="{{ $loop->last && $others->count() == 3 ? 'md:col-span-2' : '' }} relative rounded-2xl overflow-hidden group shadow-md bg-gray-200">
+                @if($item->type === 'video')
+                    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+                        <div class="w-10 h-10 bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center">
+                            <span class="material-icons text-white">play_arrow</span>
+                        </div>
+                    </div>
+                    <video src="{{ asset('storage/' . $item->file) }}" class="w-full h-full object-cover"></video>
+                @else
+                    <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition z-10"></div>
+                    <img src="{{ asset('storage/' . $item->file) }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                @endif
+                
+                <div class="absolute bottom-0 left-0 p-3 bg-gradient-to-t from-black/80 to-transparent w-full">
+                     <p class="text-white text-xs font-bold truncate">{{ $item->title }}</p>
+                </div>
             </div>
-            <div class="relative rounded-2xl overflow-hidden group shadow-md">
-                <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition z-10"></div>
-                <img src="https://source.unsplash.com/400x400/?community" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-            </div>
-            <div class="md:col-span-2 relative rounded-2xl overflow-hidden group shadow-md">
-                <div class="absolute inset-0 bg-black/30 group-hover:bg-transparent transition z-10"></div>
-                <img src="https://source.unsplash.com/800x400/?police,team" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

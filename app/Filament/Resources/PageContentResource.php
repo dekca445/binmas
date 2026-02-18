@@ -31,13 +31,37 @@ class PageContentResource extends Resource
                         'kontak' => 'Kontak',
                     ])
                     ->required(),
-                Forms\Components\TextInput::make('section')
+                Forms\Components\Select::make('section')
                     ->label('Bagian (Section)')
-                    ->required()
-                    ->placeholder('Contoh: hero, sambutan, sejarah'),
-                Forms\Components\TextInput::make('key')
+                    ->options([
+                        'hero' => 'Hero (Atas)',
+                        'sambutan' => 'Sambutan',
+                        'sejarah' => 'Sejarah',
+                        'visi-misi' => 'Visi & Misi',
+                        'main' => 'Kontak Utama',
+                        'social' => 'Media Sosial',
+                        'map' => 'Peta',
+                    ])
+                    ->required(),
+                Forms\Components\Select::make('key')
                     ->label('Kata Kunci (Key)')
-                    ->placeholder('Contoh: title, content'),
+                    ->options([
+                        'title' => 'Judul',
+                        'content' => 'Konten / Deskripsi',
+                        'image' => 'Gambar',
+                        'name' => 'Nama Pejabat',
+                        'address' => 'Alamat',
+                        'phone' => 'Telepon',
+                        'email' => 'Email',
+                        'website' => 'Website',
+                        'instagram_url' => 'Instagram',
+                        'facebook_url' => 'Facebook',
+                        'twitter_url' => 'Twitter/X',
+                        'youtube_url' => 'YouTube',
+                        'map_embed' => 'Embed Map',
+                    ])
+                    ->searchable()
+                    ->required(),
                 Forms\Components\RichEditor::make('content')
                     ->label('Konten Teks')
                     ->columnSpanFull(),

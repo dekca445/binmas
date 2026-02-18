@@ -38,11 +38,11 @@
                         
                         {{-- Container Gambar --}}
                         <div class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-700 bg-gray-200">
-                            <img src="https://via.placeholder.com/400x500" alt="Dirbinmas Polda NTB" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                            <img src="{{ $imageUrl ? asset('storage/' . $imageUrl) : 'https://via.placeholder.com/400x500' }}" alt="Dirbinmas Polda NTB" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
                             
                             {{-- Label Nama Overlay --}}
                             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
-                                <h4 class="text-white font-bold text-lg leading-tight">Kombes Pol Desy Ismail, S.I.K.</h4>
+                                <h4 class="text-white font-bold text-lg leading-tight">{{ $sambutanData['name'] ?? 'Nama Pejabat' }}</h4>
                                 <p class="text-accent text-xs font-bold uppercase tracking-widest mt-1">Dirbinmas Polda NTB</p>
                             </div>
                         </div>
@@ -52,9 +52,8 @@
                     <div class="mt-8 w-full max-w-[300px] mx-auto lg:mx-0 text-center lg:text-left">
                         <p class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3">Terhubung dengan Pimpinan</p>
                         <div class="flex justify-center lg:justify-start gap-3">
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"><span class="material-icons text-sm">link</span></a>
+                            <a href="#" class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"><span class="material-icons text-sm">share</span></a>
                         </div>
                     </div>
 
@@ -65,60 +64,12 @@
                     
                     {{-- Headline (Style Home) --}}
                     <h2 class="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-8 leading-tight">
-                        Mewujudkan Kamtibmas yang <span class="relative text-primary dark:text-accent z-10">
-                            Kondusif
-                            <svg class="absolute w-full h-3 -bottom-1 left-0 -z-10 text-accent/40" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
-                            </svg>
-                        </span> Melalui Kemitraan.
+                        {!! $sambutanData['title'] ?? 'Judul Sambutan' !!}
                     </h2>
 
                     {{-- Isi Teks --}}
                     <div class="prose prose-lg text-gray-600 dark:text-gray-300 text-justify max-w-none">
-                        <p class="lead font-bold text-gray-900 dark:text-white text-xl">
-                            Assalamu’alaikum Warahmatullahi Wabarakatuh,<br>
-                            Salam Presisi.
-                        </p>
-                        
-                        <p>
-                            Puji syukur kita panjatkan ke hadirat Allah SWT, Tuhan Yang Maha Esa, atas segala limpahan rahmat dan karunia-Nya, sehingga website resmi Direktorat Pembinaan Masyarakat (Ditbinmas) Polda Nusa Tenggara Barat ini dapat hadir di tengah-tengah masyarakat.
-                        </p>
-                        
-                        <p>
-                            Di era digitalisasi saat ini, keterbukaan informasi publik merupakan keniscayaan. Website ini kami hadirkan sebagai sarana komunikasi dua arah antara Polri dan masyarakat, serta sebagai wujud transparansi kinerja kami dalam mengemban tugas preemtif kepolisian.
-                        </p>
-
-                        {{-- Blockquote Estetik --}}
-                        <div class="my-8 relative pl-8 py-2 border-l-4 border-accent bg-gray-50 dark:bg-gray-700/50 rounded-r-xl">
-                            <span class="absolute top-0 left-2 text-4xl text-gray-300 font-serif">“</span>
-                            <p class="italic text-gray-700 dark:text-gray-200 font-medium m-0">
-                                Keamanan dan ketertiban bukanlah semata-mata tanggung jawab Polri, melainkan hasil dari sinergi dan kolaborasi harmonis antara aparat keamanan dan seluruh elemen masyarakat.
-                            </p>
-                        </div>
-                        
-                        <p>
-                            Tugas Binmas tidaklah ringan. Kami berada di garda terdepan dalam membangun kesadaran hukum dan partisipasi aktif masyarakat. Melalui para Bhabinkamtibmas yang tersebar di seluruh pelosok desa, kami berupaya hadir menjadi solusi (problem solver) atas berbagai permasalahan sosial yang ada.
-                        </p>
-                        
-                        <p>
-                            Kami menyadari bahwa pelayanan kami belum sempurna. Oleh karena itu, melalui website ini, kami juga membuka ruang bagi masyarakat untuk memberikan saran, masukan, maupun pengaduan demi perbaikan kinerja kami ke depan.
-                        </p>
-                        
-                        <p>
-                            Semoga website ini bermanfaat bagi kita semua. Mari bersama-sama kita wujudkan Nusa Tenggara Barat yang aman, damai, dan kondusif.
-                        </p>
-
-                        <div class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-700">
-                            <p class="font-bold text-gray-900 dark:text-white">
-                                Wassalamu’alaikum Warahmatullahi Wabarakatuh.
-                            </p>
-                            
-                            {{-- Tanda Tangan --}}
-                            <div class="mt-6">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png" alt="Tanda Tangan" class="h-20 opacity-70 filter dark:invert">
-                                <p class="text-sm text-gray-500 font-bold mt-2 uppercase tracking-widest">Dirbinmas Polda NTB</p>
-                            </div>
-                        </div>
+                        {!! $sambutanData['content'] ?? '<p>Konten sambutan belum tersedia.</p>' !!}
                     </div>
 
                 </div>

@@ -23,9 +23,13 @@ public function index()
     $services = \App\Models\Service::all();
 
     // Ambil Data Sinergi (Partners)
+    // Ambil Data Sinergi (Partners)
     $partners = \App\Models\Partner::all();
 
-    return view('pages.home', compact('recentPosts', 'homeContent', 'members', 'services', 'partners'));
+    // Ambil Data Galeri
+    $galleries = \App\Models\Gallery::where('is_published', true)->latest()->take(4)->get();
+
+    return view('pages.home', compact('recentPosts', 'homeContent', 'members', 'services', 'partners', 'galleries'));
 }
 
     public function profil()
@@ -45,10 +49,36 @@ public function index()
         return view('pages.profil', compact('profileData', 'structureRoots', 'documents'));
     }
 
-    public function berita()
+    public function berita(Request $request)
     {
-        // Nanti di sini kita ambil data dari Database (Model)
-        return view('pages.berita');
+        $query = \App\Models\Post::query();
+
+        // Filter by Search
+        if ($request->has('search') && $request->search != '') {
+            $query->where(function($q) use ($request) {
+                $q->where('title', 'like', '%' . $request->search . '%')
+                  ->orWhere('content', 'like', '%' . $request->search . '%')
+                  ->orWhere('tags', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        // Filter by Category
+        if ($request->has('category') && $request->category != '') {
+            $query->where('category', $request->category);
+        }
+
+        $posts = $query->where('is_published', true)->latest()->paginate(9)->withQueryString();
+        
+        // Data for Sidebar
+        $populer = \App\Models\Post::where('is_published', true)->orderBy('views', 'desc')->take(5)->get();
+
+        return view('pages.berita', compact('posts', 'populer'));
+    }
+
+    public function galeri()
+    {
+        $galleries = \App\Models\Gallery::where('is_published', true)->latest()->paginate(12);
+        return view('pages.galeri', compact('galleries'));
     }
 
     public function kontak()
@@ -59,7 +89,18 @@ public function index()
         return view('pages.kontak', compact('contactData'));
     }
     public function sambutan()
-{
-    return view('pages.sambutan');
-}
+    {
+        $sambutanContent = \App\Models\PageContent::where('page', 'home')
+                            ->where('section', 'sambutan')
+                            ->get();
+        $sambutanData = $sambutanContent->pluck('content', 'key');
+        // Image is usually stored in 'image' key or separate field. 
+        // In PageContent seeder, image is stored in 'image' column for key='image'.
+        // Let's get the image URL from the record where key='image'.
+        
+        $imageRecord = $sambutanContent->where('key', 'image')->first();
+        $imageUrl = $imageRecord ? $imageRecord->image : null;
+        
+        return view('pages.sambutan', compact('sambutanData', 'imageUrl'));
+    }
 }
