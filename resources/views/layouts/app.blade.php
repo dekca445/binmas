@@ -90,40 +90,39 @@
                                 class="text-gray-300 group-hover:text-white px-3 py-2 text-sm font-medium inline-flex items-center transition-colors">
                                 Satuan Fungsi <span class="material-icons text-sm ml-1">expand_more</span>
                             </button>
-                            <div class="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 hidden group-hover:block z-50 animate-fade-in-down border-t-4 border-accent">
-    {{-- Ubah 'satuan-fungsi' menjadi 'satker.show' --}}
-    <a href="{{ route('satker.show', 'bag-binopsnal') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Bag
-        Binopsnal</a>
-    <a href="{{ route('satker.show', 'subdit-binpolmas') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-        Binpolmas</a>
-    <a href="{{ route('satker.show', 'subdit-binsatpam-polsus') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-        Binsatpam/Polsus</a>
-    <a href="{{ route('satker.show', 'subdit-bintibsos') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-        Bintibsos</a>
-    <a href="{{ route('satker.show', 'subdit-bhabinkamtibmas') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subdit
-        Bhabinkamtibmas</a>
-    <a href="{{ route('satker.show', 'subbag-renmin') }}"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary">Subbag
-        Renmin</a>
-</div>
+
+                            <div
+                                class="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-2 hidden group-hover:block z-50 animate-fade-in-down border-t-4 border-accent">
+                                {{-- LOGIKA DINAMIS: Ambil semua Satker dari Database --}}
+                                @php
+                                    $satkers = \App\Models\Satker::all();
+                                @endphp
+
+                                @foreach ($satkers as $menuSatker)
+                                    <a href="{{ route('satker.show', $menuSatker->slug) }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-primary border-b border-gray-50 last:border-0 uppercase">
+                                        {{ $menuSatker->name }}
+                                    </a>
+                                @endforeach
+
+                                @if ($satkers->isEmpty())
+                                    <span class="block px-4 py-2 text-xs text-gray-400 italic">Belum ada data
+                                        Satker</span>
+                                @endif
+                            </div>
                         </div>
 
                         {{-- Baris 116 --}}
-<a href="{{ route('berita.index') }}"
-   class="{{ request()->routeIs('berita.index') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
-   Berita
-</a>
+                        <a href="{{ route('berita.index') }}"
+                            class="{{ request()->routeIs('berita.index') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
+                            Berita
+                        </a>
 
-{{-- Baris 118 --}}
-<a href="{{ route('kontak') }}"
-   class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
-   Kontak
-</a>
+                        {{-- Baris 118 --}}
+                        <a href="{{ route('kontak') }}"
+                            class="{{ request()->routeIs('kontak') ? 'text-white border-b-2 border-accent' : 'text-gray-300 hover:text-white' }} px-3 py-2 text-sm font-medium transition-colors">
+                            Kontak
+                        </a>
                     </div>
                 </div>
 

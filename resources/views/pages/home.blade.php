@@ -4,11 +4,22 @@
 
 @section('content')
 
+@php
+    $heroTitle = $homeContent->where('section', 'hero')->where('key', 'title')->first()->content ?? 'Mengayomi & Melindungi <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Masyarakat NTB</span>';
+    $heroDesc = $homeContent->where('section', 'hero')->where('key', 'content')->first()->content ?? 'Direktorat Binmas Polda NTB berkomitmen membangun kemitraan yang kuat dengan masyarakat untuk menciptakan keamanan dan ketertiban yang kondusif.';
+    $heroImage = $homeContent->where('section', 'hero')->where('key', 'image')->first()->image ?? null;
+
+    $sambutanTitle = $homeContent->where('section', 'sambutan')->where('key', 'title')->first()->content ?? 'Mewujudkan Kamtibmas yang <span class="relative text-primary dark:text-accent z-10">Kondusif</span> Melalui Kemitraan.';
+    $sambutanContent = $homeContent->where('section', 'sambutan')->where('key', 'content')->first()->content ?? 'Selamat datang di website resmi Ditbinmas Polda NTB...';
+    $sambutanImage = $homeContent->where('section', 'sambutan')->where('key', 'image')->first()->image ?? null;
+    $sambutanName = $homeContent->where('section', 'sambutan')->where('key', 'name')->first()->content ?? 'Kombes Pol Desy Ismail, S.I.K.';
+@endphp
+
 {{-- 1. HERO SECTION (Banner Utama) --}}
 <div class="relative bg-gray-900 h-[750px] overflow-hidden group">
     {{-- Background Image & Overlay --}}
     <div class="absolute inset-0">
-        <img src="https://source.unsplash.com/1600x900/?police,indonesia" alt="Background" class="w-full h-full object-cover opacity-50 transition-transform duration-[3000ms] group-hover:scale-105">
+        <img src="{{ $heroImage ? asset('storage/' . $heroImage) : 'https://source.unsplash.com/1600x900/?police,indonesia' }}" alt="Background" class="w-full h-full object-cover opacity-50 transition-transform duration-[3000ms] group-hover:scale-105">
         <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
     </div>
@@ -23,14 +34,13 @@
             
             {{-- Headline --}}
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight drop-shadow-lg">
-                Mengayomi & Melindungi <br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">Masyarakat NTB</span>
+                {!! $heroTitle !!}
             </h1>
             
             {{-- Deskripsi --}}
-            <p class="text-lg text-gray-300 mb-8 leading-relaxed max-w-lg border-l-4 border-accent pl-4">
-                Direktorat Binmas Polda NTB berkomitmen membangun kemitraan yang kuat dengan masyarakat untuk menciptakan keamanan dan ketertiban yang kondusif.
-            </p>
+            <div class="text-lg text-gray-300 mb-8 leading-relaxed max-w-lg border-l-4 border-accent pl-4">
+                {!! $heroDesc !!}
+            </div>
             
             {{-- Tombol Aksi --}}
             <div class="flex flex-col sm:flex-row gap-4 mb-10">
@@ -75,11 +85,11 @@
                     
                     {{-- Container Foto --}}
                     <div class="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-700 bg-gray-200">
-                        <img src="https://via.placeholder.com/400x500" alt="Dirbinmas Polda NTB" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        <img src="{{ $sambutanImage ? asset('storage/' . $sambutanImage) : 'https://via.placeholder.com/400x500' }}" alt="Dirbinmas Polda NTB" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
                         
                         {{-- Label Nama --}}
                         <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-6 pt-12">
-                            <h4 class="text-white font-bold text-lg leading-tight">Kombes Pol Desy Ismail, S.I.K.</h4>
+                            <h4 class="text-white font-bold text-lg leading-tight">{{ $sambutanName }}</h4>
                             <p class="text-accent text-xs font-bold uppercase tracking-widest mt-1">Dirbinmas Polda NTB</p>
                         </div>
                     </div>
@@ -94,19 +104,11 @@
                 </div>
                 
                 <h2 class="text-3xl md:text-5xl font-black text-gray-900 dark:text-white mb-8 leading-tight">
-                    Mewujudkan Kamtibmas yang <span class="relative text-primary dark:text-accent z-10">
-                        Kondusif
-                        <svg class="absolute w-full h-3 -bottom-1 left-0 -z-10 text-accent/40" viewBox="0 0 100 10" preserveAspectRatio="none">
-                            <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" />
-                        </svg>
-                    </span> Melalui Kemitraan.
+                    {!! $sambutanTitle !!}
                 </h2>
                 
                 <div class="prose prose-lg text-gray-600 dark:text-gray-300 mb-10 leading-relaxed">
-                    <p>
-                        <span class="text-6xl float-left mr-3 mt-[-15px] text-accent font-serif opacity-50">"</span>
-                        Selamat datang di website resmi Ditbinmas Polda NTB. Kami hadir sebagai wujud transparansi dan komitmen Polri dalam memberikan pelayanan terbaik kepada masyarakat. Melalui platform digital ini, kami berharap dapat mempererat sinergi antara polisi dan masyarakat dalam menjaga keamanan lingkungan.
-                    </p>
+                   {!! $sambutanContent !!}
                 </div>
                 
                <a href="{{ route('sambutan') }}" class="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl group">
@@ -131,41 +133,16 @@
         {{-- Grid Menu --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            {{-- Item 1 --}}
-            <a href="#" class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 border-b-4 border-blue-500 hover:border-accent hover:-translate-y-2 transition-all duration-300 group text-center">
+            @foreach($services as $service)
+            {{-- Item --}}
+            <a href="{{ $service->link ?? '#' }}" class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 border-b-4 border-blue-500 hover:border-accent hover:-translate-y-2 transition-all duration-300 group text-center">
                 <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <span class="material-icons text-3xl">assignment_ind</span>
+                    <span class="material-icons text-3xl">{{ $service->icon }}</span>
                 </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Registrasi Satpam</h3>
-                <p class="text-gray-500 text-xs leading-relaxed">Pendaftaran KTA, perpanjangan izin, dan info pelatihan Gada Pratama.</p>
+                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">{{ $service->title }}</h3>
+                <p class="text-gray-500 text-xs leading-relaxed">{{ $service->description }}</p>
             </a>
-
-            {{-- Item 2 --}}
-            <a href="#" class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 border-b-4 border-yellow-500 hover:border-accent hover:-translate-y-2 transition-all duration-300 group text-center">
-                <div class="w-14 h-14 bg-yellow-50 text-yellow-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:bg-yellow-500 group-hover:text-white transition-colors">
-                    <span class="material-icons text-3xl">groups</span>
-                </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Forum Kemitraan</h3>
-                <p class="text-gray-500 text-xs leading-relaxed">FKPM, Tokoh Masyarakat, dan sinergi Polmas di lingkungan Anda.</p>
-            </a>
-
-            {{-- Item 3 --}}
-            <a href="#" class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 border-b-4 border-green-500 hover:border-accent hover:-translate-y-2 transition-all duration-300 group text-center">
-                <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:bg-green-600 group-hover:text-white transition-colors">
-                    <span class="material-icons text-3xl">support_agent</span>
-                </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Pengaduan</h3>
-                <p class="text-gray-500 text-xs leading-relaxed">Saluran pengaduan masyarakat dan konsultasi hukum Kamtibmas.</p>
-            </a>
-
-            {{-- Item 4 --}}
-            <a href="#" class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 border-b-4 border-red-500 hover:border-accent hover:-translate-y-2 transition-all duration-300 group text-center">
-                <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:bg-red-600 group-hover:text-white transition-colors">
-                    <span class="material-icons text-3xl">campaign</span>
-                </div>
-                <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-2">Binluh & Edukasi</h3>
-                <p class="text-gray-500 text-xs leading-relaxed">Jadwal sosialisasi ke sekolah, kampus, dan kelompok masyarakat.</p>
-            </a>
+            @endforeach
             
         </div>
     </div>
@@ -176,22 +153,12 @@
     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+            @foreach($members as $member)
             <div class="p-4 group">
-                <div class="text-5xl font-black text-accent mb-2 counter" data-target="156">0</div>
-                <p class="text-xs uppercase tracking-widest opacity-80 group-hover:text-white transition">Bhabinkamtibmas</p>
+                <div class="text-5xl font-black text-accent mb-2 counter" data-target="{{ $member->count }}">0</div>
+                <p class="text-xs uppercase tracking-widest opacity-80 group-hover:text-white transition">{{ $member->name }}</p>
             </div>
-            <div class="p-4 group">
-                <div class="text-5xl font-black text-accent mb-2 counter" data-target="84">0</div>
-                <p class="text-xs uppercase tracking-widest opacity-80 group-hover:text-white transition">Pos Kamling</p>
-            </div>
-            <div class="p-4 group">
-                <div class="text-5xl font-black text-accent mb-2 counter" data-target="1200">0</div>
-                <p class="text-xs uppercase tracking-widest opacity-80 group-hover:text-white transition">Satpam Terdaftar</p>
-            </div>
-            <div class="p-4 group">
-                <div class="text-5xl font-black text-accent mb-2 counter" data-target="320">0</div>
-                <p class="text-xs uppercase tracking-widest opacity-80 group-hover:text-white transition">Giat Penyuluhan</p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -211,64 +178,44 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {{-- LOGIKA PHP YANG ANDA BUAT --}}
-            @php
-                $postsToDisplay = (isset($recentPosts) && $recentPosts->count() > 0) ? $recentPosts : collect([
-                    (object)[
-                        'judul' => 'Simulasi: Giat Sambang Desa Pantau Situasi Kondusif',
-                        'slug' => 'simulasi-berita-1',
-                        'kategori' => 'Giat Binmas',
-                        'created_at' => now(),
-                        'gambar' => null,
-                    ],
-                    (object)[
-                        'judul' => 'Simulasi: Apel Kasatkamling se-Pulau Lombok',
-                        'slug' => 'simulasi-berita-2',
-                        'kategori' => 'Satpam',
-                        'created_at' => now()->subDays(1),
-                        'gambar' => null,
-                    ],
-                    (object)[
-                        'judul' => 'Simulasi: Edukasi Bahaya Narkoba di Sekolah',
-                        'slug' => 'simulasi-berita-3',
-                        'kategori' => 'Edukasi',
-                        'created_at' => now()->subDays(2),
-                        'gambar' => null,
-                    ]
-                ]);
-            @endphp
-
-            @foreach($postsToDisplay as $item)
-            <article class="group bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
-                <div class="relative h-52 overflow-hidden shrink-0">
-                    @if($item->gambar)
-                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    @else
-                        <img src="https://source.unsplash.com/800x600/?police,security&sig={{ $loop->iteration }}" alt="Berita" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    @endif
-                    
-                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-primary text-[10px] font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">
-                        {{ $item->kategori }}
+            {{-- LOGIKA: Hanya tampilkan jika ada berita --}}
+            @if(isset($recentPosts) && $recentPosts->count() > 0)
+                @foreach($recentPosts as $item)
+                <article class="group bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
+                    <div class="relative h-52 overflow-hidden shrink-0">
+                        @if($item->image)
+                            <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @else
+                            <img src="https://source.unsplash.com/800x600/?police,security&sig={{ $loop->iteration }}" alt="Berita" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        @endif
+                        
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-primary text-[10px] font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                            {{ $item->category ?? 'Berita' }}
+                        </div>
                     </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                            <span class="material-icons text-[14px] text-accent">event</span> 
+                            {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                            <a href="{{ route('berita.show', $item->slug) }}">
+                                {{ $item->title }}
+                            </a>
+                        </h3>
+                        <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                            <a href="{{ route('berita.show', $item->slug) }}" class="inline-flex items-center text-primary font-bold text-xs uppercase tracking-wide hover:underline">
+                                Baca Selengkapnya <span class="material-icons text-sm ml-1">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                @endforeach
+            @else
+                <div class="col-span-3 text-center py-10">
+                    <p class="text-gray-500 italic">Belum ada berita terbaru.</p>
                 </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <div class="flex items-center gap-2 text-xs text-gray-400 mb-3">
-                        <span class="material-icons text-[14px] text-accent">event</span> 
-                        {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d M Y') }}
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 dark:text-white mb-3 leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                        <a href="{{ $item->slug == '#' ? '#' : route('berita.show', $item->slug) }}">
-                            {{ $item->judul }}
-                        </a>
-                    </h3>
-                    <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
-                        <a href="{{ $item->slug == '#' ? '#' : route('berita.show', $item->slug) }}" class="inline-flex items-center text-primary font-bold text-xs uppercase tracking-wide hover:underline">
-                            Baca Selengkapnya <span class="material-icons text-sm ml-1">arrow_forward</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            @endforeach
+            @endif
         </div>
     </div>
 </section>
@@ -316,9 +263,14 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="text-center text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Sinergi Instansi</p>
         <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Lambang_Polri.png" class="h-14 w-auto hover:opacity-100 transition-opacity hover:scale-110 duration-300" alt="Polri" title="Mabes Polri">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_Polda_NTB.png" class="h-14 w-auto hover:opacity-100 transition-opacity hover:scale-110 duration-300" alt="Polda NTB" title="Polda NTB">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logo_Presisi_Polri.png" class="h-10 w-auto hover:opacity-100 transition-opacity hover:scale-110 duration-300" alt="Presisi" title="Polri Presisi">
+            @foreach($partners as $partner)
+            <a href="{{ $partner->link ?? '#' }}" target="_blank" title="{{ $partner->name }}">
+                <img src="{{ asset('storage/' . $partner->logo) }}" class="h-14 w-auto hover:opacity-100 transition-opacity hover:scale-110 duration-300" alt="{{ $partner->name }}">
+            </a>
+            @endforeach
+            @if($partners->isEmpty())
+                <p class="text-xs text-gray-400">Belum ada data sinergi.</p>
+            @endif
         </div>
     </div>
 </section>

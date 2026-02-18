@@ -33,9 +33,7 @@
             </div>
             <h3 class="font-bold text-gray-800 text-xl mb-2">Markas Komando</h3>
             <p class="text-gray-500 text-sm leading-relaxed mb-4">
-                Jl. Gajah Mada No. 07, Pagesangan,<br>
-                Kec. Mataram, Kota Mataram,<br>
-                Nusa Tenggara Barat 83127
+                {!! $contactData['address'] ?? 'Jl. Gajah Mada No. 07, Pagesangan,<br>Kec. Mataram, Kota Mataram,<br>Nusa Tenggara Barat 83127' !!}
             </p>
             <a href="https://maps.google.com" target="_blank" class="text-blue-600 text-sm font-bold hover:underline flex items-center gap-1">
                 Buka di Maps <span class="material-icons text-xs">open_in_new</span>
@@ -55,11 +53,11 @@
                 </div>
                 <div class="flex items-center justify-between text-sm">
                     <span class="text-gray-500">Telepon</span>
-                    <span class="font-bold text-gray-800">(0370) 642xxx</span>
+                    <span class="font-bold text-gray-800">{{ $contactData['phone'] ?? '(0370) 642xxx' }}</span>
                 </div>
                 <div class="flex items-center justify-between text-sm">
                     <span class="text-gray-500">Fax</span>
-                    <span class="font-bold text-gray-800">(0370) 642xxx</span>
+                    <span class="font-bold text-gray-800">{{ $contactData['fax'] ?? '(0370) 642xxx' }}</span>
                 </div>
             </div>
         </div>
@@ -71,13 +69,13 @@
             </div>
             <h3 class="font-bold text-gray-800 text-xl mb-2">Korespondensi Digital</h3>
             <div class="space-y-3">
-                <a href="mailto:ditbinmas@ntb.polri.go.id" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                <a href="mailto:{{ $contactData['email'] ?? 'ditbinmas@ntb.polri.go.id' }}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
                     <span class="material-icons text-gray-400 text-sm">mail</span>
-                    <span class="text-sm font-medium text-gray-700">ditbinmas@ntb.polri.go.id</span>
+                    <span class="text-sm font-medium text-gray-700">{{ $contactData['email'] ?? 'ditbinmas@ntb.polri.go.id' }}</span>
                 </a>
-                <a href="#" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
+                <a href="{{ $contactData['website'] ?? '#' }}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition">
                     <span class="material-icons text-gray-400 text-sm">language</span>
-                    <span class="text-sm font-medium text-gray-700">ntb.polri.go.id</span>
+                    <span class="text-sm font-medium text-gray-700">{{ $contactData['website'] ?? 'ntb.polri.go.id' }}</span>
                 </a>
             </div>
         </div>
@@ -141,7 +139,7 @@
             {{-- Widget Peta --}}
             <div class="bg-white rounded-3xl shadow-lg p-2 border border-gray-100 h-[300px] relative group overflow-hidden">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.066547370682!2d116.10875731478347!3d-8.58960299382379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdbf5c23d8659f%3A0x67396652433f829!2sPolda%20Nusa%20Tenggara%20Barat!5e0!3m2!1sid!2sid!4v1625632123456!5m2!1sid!2sid" 
+                    src="{{ $contactData['map_embed'] ?? 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.066547370682!2d116.10875731478347!3d-8.58960299382379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dcdbf5c23d8659f%3A0x67396652433f829!2sPolda%20Nusa%20Tenggara%20Barat!5e0!3m2!1sid!2sid!4v1625632123456!5m2!1sid!2sid' }}" 
                     width="100%" height="100%" style="border:0; border-radius: 1rem;" 
                     allowfullscreen="" loading="lazy">
                 </iframe>
@@ -159,19 +157,19 @@
                 </h3>
                 
                 <div class="grid grid-cols-2 gap-4 mb-8">
-                    <a href="#" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
+                    <a href="{{ $contactData['instagram_url'] ?? '#' }}" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="w-6 h-6">
                         <span class="text-sm font-medium">Instagram</span>
                     </a>
-                    <a href="#" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
+                    <a href="{{ $contactData['facebook_url'] ?? '#' }}" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="w-6 h-6">
                         <span class="text-sm font-medium">Facebook</span>
                     </a>
-                    <a href="#" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
+                    <a href="{{ $contactData['twitter_url'] ?? '#' }}" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" class="w-6 h-6">
                         <span class="text-sm font-medium">Twitter/X</span>
                     </a>
-                    <a href="#" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
+                    <a href="{{ $contactData['youtube_url'] ?? '#' }}" class="flex items-center gap-3 bg-white/10 p-3 rounded-xl hover:bg-white/20 transition">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" class="w-6 h-auto">
                         <span class="text-sm font-medium">YouTube</span>
                     </a>
