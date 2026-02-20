@@ -13,31 +13,31 @@ class PostSeeder extends Seeder
             [
                 'title' => 'Polda NTB Gelar Operasi Bina Kusuma Rinjani 2023',
                 'excerpt' => 'Operasi ini bertujuan untuk menekan angka kriminalitas dan premanisme di wilayah hukum Polda NTB.',
-                'image' => null,
+                'thumbnail' => null,
                 'category' => 'Operasi',
             ],
             [
                 'title' => 'Dir Binmas Hadiri Kegiatan Jumat Curhat di Mataram',
                 'excerpt' => 'Kombes Pol Desy Ismail mendengarkan langsung keluhan masyarakat terkait situasi kamtibmas.',
-                'image' => null,
+                'thumbnail' => null,
                 'category' => 'Kegiatan',
             ],
             [
                 'title' => 'Sosialisasi Bahaya Narkoba di SMKN 1 Mataram',
                 'excerpt' => 'Subdit Bintibsos memberikan penyuluhan kepada siswa-siswi agar menjauhi narkoba.',
-                'image' => null,
+                'thumbnail' => null,
                 'category' => 'Penyuluhan',
             ],
             [
                 'title' => 'Pembinaan Satpam Gada Pratama Resmi Ditutup',
                 'excerpt' => 'Sebanyak 50 peserta dinyatakan lulus pelatihan dasar satpam.',
-                'image' => null,
+                'thumbnail' => null,
                 'category' => 'Diklat',
             ],
             [
                 'title' => 'Bhabinkamtibmas Bantu Warga Terdampak Banjir',
                 'excerpt' => 'Polisi RW dan Bhabinkamtibmas bahu-membahu membersihkan sisa lumpur di rumah warga.',
-                'image' => null,
+                'thumbnail' => null,
                 'category' => 'Sosial',
             ],
         ];
@@ -47,7 +47,7 @@ class PostSeeder extends Seeder
                 'title' => $post['title'],
                 'slug' => Str::slug($post['title']),
                 'content' => '<p>' . $post['excerpt'] . ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
-                'thumbnail' => $post['image'], // Ganti image jadi thumbnail
+                'thumbnail' => $post['thumbnail'], // Updated key
                 'tags' => ['Giat Binmas', 'Polda NTB'], // Tambah tags default
                 'is_published' => true,
                 'author' => 'Admin Binmas', // Ganti author_id jadi author string
