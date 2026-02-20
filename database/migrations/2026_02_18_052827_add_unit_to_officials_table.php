@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('officials', function (Blueprint $table) {
-            $table->string('unit')->nullable()->after('rank'); // Menambahkan kolom unit
-        });
+        if (!Schema::hasColumn('officials', 'unit')) {
+            Schema::table('officials', function (Blueprint $table) {
+                $table->string('unit')->nullable()->after('rank'); // Menambahkan kolom unit
+            });
+        }
     }
 
     /**

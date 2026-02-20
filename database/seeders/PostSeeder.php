@@ -47,11 +47,10 @@ class PostSeeder extends Seeder
                 'title' => $post['title'],
                 'slug' => Str::slug($post['title']),
                 'content' => '<p>' . $post['excerpt'] . ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
-                'image' => $post['image'],
-                'published_at' => now()->subDays(rand(1, 30)),
+                'thumbnail' => $post['image'], // Ganti image jadi thumbnail
+                'tags' => ['Giat Binmas', 'Polda NTB'], // Tambah tags default
                 'is_published' => true,
-                'author_id' => 1, // Asumsi User ID 1 ada
-                // 'category_id' => ... (Jika pakai relasi kategori, sesuaikan)
+                'author' => 'Admin Binmas', // Ganti author_id jadi author string
             ]);
         }
     }

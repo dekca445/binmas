@@ -61,6 +61,8 @@ class SubditSeeder extends Seeder
                     'tugas_pokok' => $data['tugas_pokok'],
                     'fungsi' => ['Fungsi Default 1', 'Fungsi Default 2'],
                     'documents' => [],
+                    'agenda' => [], // Added agenda
+                    'faq' => [],    // Added faq
                     'slug' => Str::slug($data['name']),
                 ]
             );
