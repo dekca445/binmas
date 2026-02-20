@@ -46,11 +46,13 @@ class PostSeeder extends Seeder
             \App\Models\Post::create([
                 'title' => $post['title'],
                 'slug' => Str::slug($post['title']),
+                'category' => $post['category'], // Added category
+                'excerpt' => $post['excerpt'],   // Added excerpt
                 'content' => '<p>' . $post['excerpt'] . ' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>',
-                'thumbnail' => $post['thumbnail'], // Updated key
-                'tags' => ['Giat Binmas', 'Polda NTB'], // Tambah tags default
+                'thumbnail' => $post['thumbnail'],
+                'tags' => ['Giat Binmas', 'Polda NTB'],
                 'is_published' => true,
-                'author' => 'Admin Binmas', // Ganti author_id jadi author string
+                'author' => 'Admin Binmas',
             ]);
         }
     }
