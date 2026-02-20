@@ -1,59 +1,136 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Binmas Polda NTB - Web Profile & Admin Panel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Website Profil dan Sistem Manajemen Konten (CMS) untuk Direktorat Pembinaan Masyarakat (Ditbinmas) Polda Nusa Tenggara Barat. Dibangun menggunakan **Laravel 12** dan **FilamentPHP 3**.
 
-## About Laravel
+![Dashboard Preview](https://filamentphp.com/images/filament-panels.jpg) *[Ganti dengan screenshot asli nanti]*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Fitur Utama
+- **Frontend Publik**: Beranda, Profil (Satuan Fungsi), Berita/Artikel, Galeri, Kontak.
+- **Admin Panel**: Manajemen Berita, Galeri, Agenda, Dokumen, Struktur Organisasi, dan Konten Halaman.
+- **Dynamic Content**: Semua teks dan gambar di halaman depan dapat diubah melalui Admin Panel.
+- **Struktur Organisasi**: Visualisasi hierarki pejabat dan satuan fungsi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ Persyaratan Sistem (Requirements)
+Sebelum memulai, pastikan komputer Anda memiliki:
+- **PHP**: Versi 8.2 atau lebih baru.
+- **Composer**: Dependency manager untuk PHP.
+- **Node.js & NPM**: Untuk compile aset frontend (Tailwind CSS/Vite).
+- **Database**: MySQL atau MariaDB.
+- **Git**: Untuk kloning repository.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🚀 Instalasi di Localhost (Untuk Developer Baru)
 
-## Learning Laravel
+Ikuti langkah-langkah ini untuk menjalankan proyek di komputer Anda.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 1. Clone Repository
+Buka terminal (Command Prompt/PowerShell/Git Bash) dan jalankan:
+```bash
+git clone https://github.com/username/binmas-polda-ntb.git
+cd binmas-polda-ntb
+```
+*(Ganti URL di atas dengan URL repository GitHub Anda nanti)*
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Install Dependencies
+Install library PHP dan JavaScript yang dibutuhkan:
+```bash
+composer install
+npm install
+```
 
-## Laravel Sponsors
+### 3. Konfigurasi Environment
+Duplikat file `.env.example` menjadi `.env`:
+```bash
+cp .env.example .env
+```
+*(Di Windows, Anda bisa copy-paste file `.env.example` dan rename menjadi `.env` secara manual)*
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Buka file `.env` dan sesuaikan koneksi database:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=binmas_db
+DB_USERNAME=root
+DB_PASSWORD=
+```
+*Pastikan Anda telah membuat database kosong bernama `binmas_db` di MySQL Anda.*
 
-### Premium Partners
+### 4. Generate Key & Storage Link
+```bash
+php artisan key:generate
+php artisan storage:link
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 5. Migrasi & Seeding Database
+Jalankan perintah ini untuk membuat tabel dan mengisi data awal (User Admin & Konten Sample):
+```bash
+php artisan migrate:fresh --seed
+```
 
-## Contributing
+### 6. Jalankan Aplikasi
+Buka dua terminal terpisah:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Terminal 1 (Server PHP):**
+```bash
+php artisan serve
+```
 
-## Code of Conduct
+**Terminal 2 (Vite Build/Dev):**
+```bash
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Akses website di: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-## Security Vulnerabilities
+## 🔑 Akses Admin Panel
+Setelah menjalankan `php artisan migrate:fresh --seed`, akun admin default adalah:
+- **URL**: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+- **Email**: `admin@binmas.com`
+- **Password**: `password`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🌐 Panduan Upload ke Hosting (cPanel/Shared Hosting)
 
-## License
+### 1. Persiapan File
+1. Jalankan `npm run build` di local untuk meng-compile aset produksi.
+2. Hapus folder `node_modules` (tidak perlu di-upload).
+3. Zip seluruh folder project (kecuali `.git` dan `node_modules`).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Upload ke Hosting
+1. Login ke cPanel -> File Manager.
+2. Upload file Zip ke folder root domain (misal: `public_html` atau subfoldernya).
+3. Extract file Zip.
+
+### 3. Konfigurasi Database
+1. Di cPanel, buka **MySQL Databases**. Buat database baru dan user baru.
+2. Import file SQL (Export dari database local Anda) melalui **phpMyAdmin** di hosting.
+3. Edit file `.env` di hosting, sesuaikan:
+   - `APP_URL`: Domain Anda (misal `https://binmas.poldantb.com`)
+   - `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` sesuai yang dibuat di cPanel.
+   - `APP_ENV=production`
+   - `APP_DEBUG=false`
+
+### 4. Storage Link (Penting!)
+Di hosting, Anda mungkin tidak bisa menjalankan `php artisan storage:link`.
+Cara manual:
+1. Hapus folder `public/storage` jika ada.
+2. Di terminal hosting (jika ada SSH) jalankan: `ln -s /path/to/project/storage/app/public /path/to/project/public/storage`
+3. Atau gunakan Script PHP: Buat file `link.php` di folder `public_html`:
+   ```php
+   <?php
+   symlink('/home/user/folder_proyek/storage/app/public', '/home/user/public_html/storage');
+   echo "Symlink created";
+   ?>
+   ```
+   Akses file tersebut sekali di browser, lalu hapus.
+
+## 🤝 Kontribusi (Git Flow)
+1. **Pull** perubahan terbaru sebelum memulai kerja: `git pull origin main`.
+2. Buat **Branch** baru untuk fitur/perbaikan: `git checkout -b fitur-baru`.
+3. **Commit** perubahan Anda: `git commit -m "Menambahkan fitur X"`.
+4. **Push** ke repository: `git push origin fitur-baru`.
+5. Buat **Pull Request** di GitHub.
+
+## 🐛 Troubleshooting Umum
+- **Gambar tidak muncul?** Pastikan `php artisan storage:link` sudah dijalankan dan `APP_URL` di `.env` sudah benar.
+- **Halaman 404/Not Found?** Pastikan konfigurasi `.htaccess` (Apache) atau Nginx sudah benar untuk Laravel.
+- **Upload Gagal?** Cek `upload_max_filesize` di `php.ini` server Anda.
