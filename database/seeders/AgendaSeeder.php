@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class AgendaSeeder extends Seeder
 {
@@ -35,6 +36,7 @@ class AgendaSeeder extends Seeder
         foreach ($agendas as $agenda) {
             \App\Models\Agenda::create([
                 'title' => $agenda['title'],
+                'slug' => Str::slug($agenda['title']),
                 'date' => $agenda['date'],
                 'location' => $agenda['location'],
                 'description' => $agenda['description'],
