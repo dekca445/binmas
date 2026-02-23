@@ -84,54 +84,72 @@
     {{-- 3. MAIN CONTENT: FORM & MAP --}}
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
         
-        {{-- KOLOM KIRI: FORM PESAN (7 Kolom) --}}
-        <div class="lg:col-span-7">
-            <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-gray-100">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span class="material-icons text-primary">send</span>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Kirim Pesan & Aduan</h2>
-                        <p class="text-gray-500 text-sm">Identitas pelapor akan kami rahasiakan jika diminta.</p>
-                    </div>
-                </div>
-
-                <form action="#" method="POST" class="space-y-6">
-                    @csrf
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Nama Lengkap</label>
-                            <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Sesuai KTP">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Nomor WhatsApp</label>
-                            <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="08xxxxxxx">
-                        </div>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Kategori Pesan</label>
-                        <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-gray-700">
-                            <option value="" disabled selected>Pilih tujuan pesan Anda...</option>
-                            <option>Pengaduan Masyarakat (Dumas)</option>
-                            <option>Permohonan Informasi Publik</option>
-                            <option>Konsultasi Satpam/BUJP</option>
-                            <option>Aspirasi / Kritik & Saran</option>
-                        </select>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Isi Pesan</label>
-                        <textarea rows="5" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Jelaskan secara rinci..."></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-primary to-blue-800 hover:from-blue-800 hover:to-primary text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
-                        Kirim Pesan Sekarang <span class="material-icons">near_me</span>
-                    </button>
-                </form>
+       {{-- KOLOM KIRI: FORM PESAN (7 Kolom) --}}
+<div class="lg:col-span-7">
+    <div class="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-gray-100">
+        <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                <span class="material-icons text-primary">send</span>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Kirim Pesan & Aduan</h2>
+                <p class="text-gray-500 text-sm">Identitas pelapor akan kami rahasiakan jika diminta.</p>
             </div>
         </div>
+
+        {{-- Tambahkan ID pada form --}}
+        @if(session('error'))
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-xl shadow-sm">
+        <p class="font-bold">Gagal Mengirim</p>
+        <p class="text-sm">{{ session('error') }}</p>
+    </div>
+@endif
+        <form action="{{ route('pesan.kirim') }}" method="POST" id="contactForm" class="space-y-6">
+    @csrf
+    {{-- Field Honeypot (Sembunyikan dengan CSS) --}}
+    <div style="display:none;">
+        <input type="text" name="website" value="">
+    </div>
+           {{-- Cari bagian grid Nama dan WhatsApp, lalu ubah menjadi seperti ini --}}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="space-y-2">
+        <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Nama Lengkap</label>
+        <input type="text" id="nama" name="nama" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Sesuai KTP">
+    </div>
+    <div class="space-y-2">
+        <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Alamat Email</label>
+        <input type="email" id="email" name="email" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="contoh@email.com">
+    </div>
+</div>
+
+{{-- Nomor WhatsApp kita pindahkan ke bawah grid atau buat grid baru --}}
+<div class="space-y-2">
+    <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Nomor WhatsApp</label>
+    <input type="tel" id="whatsapp" name="whatsapp" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="628xxxxxxx">
+</div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Kategori Pesan</label>
+                <select id="kategori" name="kategori" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition text-gray-700">
+                    <option value="" disabled selected>Pilih tujuan pesan Anda...</option>
+                    <option value="Pengaduan Masyarakat (Dumas)">Pengaduan Masyarakat (Dumas)</option>
+                    <option value="Permohonan Informasi Publik">Permohonan Informasi Publik</option>
+                    <option value="Konsultasi Satpam/BUJP">Konsultasi Satpam/BUJP</option>
+                    <option value="Aspirasi / Kritik & Saran">Aspirasi / Kritik & Saran</option>
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-xs font-bold text-gray-600 uppercase tracking-wide">Isi Pesan</label>
+                <textarea id="pesan" name="pesan" rows="5" required class="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" placeholder="Jelaskan secara rinci..."></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-gradient-to-r from-primary to-blue-800 hover:from-blue-800 hover:to-primary text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 flex justify-center items-center gap-2">
+                Kirim Pesan Sekarang <span class="material-icons">near_me</span>
+            </button>
+        </form>
+    </div>
+</div>
 
         {{-- KOLOM KANAN: MAP & SOSMED (5 Kolom) --}}
         <div class="lg:col-span-5 space-y-8">
@@ -234,7 +252,7 @@
 </main>
 
 {{-- 5. NEW FEATURE: FLOATING WHATSAPP BUTTON --}}
-<a href="https://wa.me/6281234567890?text=Halo%20Admin%20Ditbinmas,%20saya%20ingin%20bertanya..." target="_blank" 
+<a href="https://wa.me/6287852566508?text=Halo%20Admin%20Ditbinmas,%20saya%20ingin%20bertanya..." target="_blank" 
    class="fixed bottom-8 right-8 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl flex items-center justify-center z-50 transition-all hover:scale-110 animate-bounce group"
    title="Chat WhatsApp">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" class="w-8 h-8 filter brightness-0 invert">
@@ -242,5 +260,49 @@
         Chat Kami
     </span>
 </a>
+
+@if(session('wa_data'))
+    <div id="wa-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl animate-bounce-in">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span class="material-icons text-4xl">check_circle</span>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">Laporan Tersimpan!</h2>
+            <p class="text-gray-500 mb-8 text-sm">Data Anda sudah masuk ke sistem kami. Silakan lanjut ke WhatsApp untuk mempercepat respon petugas.</p>
+            
+            <button onclick="lanjutKeWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl shadow-lg transition-all flex justify-center items-center gap-2">
+                Lanjut ke WhatsApp <span class="material-icons text-sm">open_in_new</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function lanjutKeWhatsApp() {
+            const data = @json(session('wa_data'));
+            const nomorAdmin = "6287852566508";
+            
+            const teks = `🚨 *LAPORAN MASUK (REF: #${data.ref})* 🚨%0A` +
+                         `━━━━━━━━━━━━━━━━━━━━━%0A` +
+                         `👤 *PENGIRIM:* ${data.nama}%0A` +
+                         `📂 *UNIT:* ${data.kategori}%0A%0A` +
+                         `📝 *ISI PESAN:*%0A_${data.pesan}_%0A` +
+                         `━━━━━━━━━━━━━━━━━━━━━%0A` +
+                         `📅 *TANGGAL:* ${new Date().toLocaleString('id-ID')} WITA`;
+
+            window.open(`https://wa.me/${nomorAdmin}?text=${teks}`, '_blank');
+            document.getElementById('wa-modal').remove();
+        }
+    </script>
+@endif
+
+@if ($errors->any())
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-xl shadow-sm">
+        <ul class="list-disc ml-5 text-sm">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 @endsection

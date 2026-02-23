@@ -166,16 +166,22 @@
 {{-- 5. KILAS BERITA --}}
 <section class="py-20 bg-white dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-            <div>
-                <span class="text-primary font-bold tracking-widest uppercase text-xs">Informasi Terkini</span>
-                <h2 class="text-3xl font-black text-gray-800 dark:text-white mt-2 uppercase tracking-tight">Kilas Berita & Giat</h2>
-                <div class="w-20 h-1.5 bg-accent mt-4 rounded-full"></div>
-            </div>
-            <a href="{{ route('berita.index') }}" class="inline-flex items-center gap-2 px-5 py-2 rounded-full border-2 border-gray-200 text-gray-600 text-sm font-bold hover:border-primary hover:text-primary transition-colors">
-                Lihat Semua <span class="material-icons text-sm">arrow_forward</span>
-            </a>
-        </div>
+        {{-- Ubah div pembungkus utama ini agar tumpuk di HP (flex-col) dan sejajar di Desktop (md:flex-row) --}}
+<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 mb-8">
+    
+    {{-- Bagian Teks Judul --}}
+    <div>
+        <span class="text-sm font-bold tracking-widest text-primary uppercase">Informasi Terkini</span>
+        <h2 class="text-3xl md:text-4xl font-black text-gray-900 mt-1">KILAS BERITA & GIAT</h2>
+        <div class="w-16 h-1.5 bg-accent mt-3 rounded-full"></div>
+    </div>
+
+    {{-- Bagian Tombol (Akan pindah ke bawah rapi saat di HP) --}}
+    <a href="{{ route('berita.index') }}" 
+       class="inline-flex items-center justify-center px-6 py-2.5 border-2 border-gray-200 rounded-full hover:bg-gray-50 transition-colors text-sm font-bold text-gray-700 w-max self-start md:self-auto">
+        Lihat Semua <span class="material-icons text-sm ml-2">arrow_forward</span>
+    </a>
+</div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {{-- LOGIKA: Hanya tampilkan jika ada berita --}}

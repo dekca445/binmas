@@ -227,13 +227,13 @@
                         <p class="text-gray-500 mt-2 max-w-2xl">Membina fungsi teknis Binmas pada <strong>10 Satuan Wilayah</strong> yang tersebar di dua pulau utama.</p>
                     </div>
     
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
                         
                         {{-- KOLOM KIRI: DAFTAR POLRES (7 Kolom) --}}
                         <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
                             
                             {{-- Card Pulau Lombok --}}
-                            <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-blue-100 dark:border-gray-700 hover:border-blue-500 transition-all duration-300">
+                            <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-blue-100 dark:border-gray-700 hover:border-blue-500 transition-all duration-300 h-full">
                                 <div class="flex items-center justify-between mb-6">
                                     <div class="flex items-center gap-3">
                                         <div class="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -245,16 +245,16 @@
                                 </div>
                                 
                                 <ul class="space-y-2">
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polresta Mataram</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Barat</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Tengah</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Timur</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Utara</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polresta+Mataram" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polresta Mataram</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Lombok+Barat" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Barat</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Lombok+Tengah" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Tengah</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Lombok+Timur" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Timur</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Lombok+Utara" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-blue-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-blue-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Lombok Utara</a></li>
                                 </ul>
                             </div>
         
                             {{-- Card Pulau Sumbawa --}}
-                            <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-green-100 dark:border-gray-700 hover:border-green-500 transition-all duration-300">
+                            <div class="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-green-100 dark:border-gray-700 hover:border-green-500 transition-all duration-300 h-full">
                                 <div class="flex items-center justify-between mb-6">
                                     <div class="flex items-center gap-3">
                                         <div class="w-10 h-10 rounded-lg bg-green-50 text-green-600 flex items-center justify-center">
@@ -266,32 +266,37 @@
                                 </div>
                                 
                                 <ul class="space-y-2">
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Sumbawa</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Sumbawa Barat</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Dompu</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Bima</a></li>
-                                    <li><a href="#" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Bima Kota</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Sumbawa" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Sumbawa</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Sumbawa+Barat" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Sumbawa Barat</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Dompu" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Dompu</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Bima" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Bima</a></li>
+                                    <li><a href="https://www.google.com/maps/search/Polres+Bima+Kota" target="_blank" class="flex items-center p-3 rounded-xl bg-gray-50 hover:bg-green-600 hover:text-white transition group/item"><span class="w-2 h-2 bg-green-500 rounded-full mr-3 group-hover/item:bg-white"></span> Polres Bima Kota</a></li>
                                 </ul>
                             </div>
                         </div>
         
-                        {{-- KOLOM KANAN: PETA VISUAL --}}
-                        <div class="lg:col-span-5 h-full">
-                            <div class="relative group h-full">
+                        {{-- KOLOM KANAN: PETA VISUAL (Telah Diperbaiki) --}}
+                        <div class="lg:col-span-5 w-full min-h-[350px]">
+                            <div class="relative group h-full w-full">
                                 <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/30 to-green-500/30 rounded-[2.5rem] rotate-3 blur-md transform transition-transform duration-500 group-hover:rotate-6"></div>
-                                <div class="relative bg-white dark:bg-gray-800 p-3 rounded-[2.5rem] shadow-2xl border border-white/50 h-full overflow-hidden">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Locator_map_of_West_Nusa_Tenggara_Province%2C_Indonesia.svg/1200px-Locator_map_of_West_Nusa_Tenggara_Province%2C_Indonesia.svg.png" 
+                                {{-- Menambahkan min-h-[350px] agar kotak tidak menciut saat gambar lambat dimuat --}}
+                                <div class="relative bg-white dark:bg-gray-800 p-3 rounded-[2.5rem] shadow-2xl border border-white/50 h-full min-h-[350px] overflow-hidden flex items-center justify-center">
+                                    {{-- Mengganti link gambar peta dengan yang lebih stabil dan aman --}}
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Indonesia_Nusa_Tenggara_Barat_location_map.svg/800px-Indonesia_Nusa_Tenggara_Barat_location_map.svg.png" 
                                          alt="Peta Wilayah Hukum Polda NTB" 
-                                         class="w-full h-full object-cover rounded-[2rem] filter contrast-110">
+                                         class="w-full h-full object-cover rounded-[2rem]">
+                                    
+                                    {{-- Mengubah bottom-6 menjadi absolute untuk memastikan letaknya konsisten --}}
                                     <div class="absolute bottom-6 left-6 right-6">
-                                        <a href="https://www.google.com/maps/place/Polda+Nusa+Tenggara+Barat" target="_blank" class="flex items-center justify-center gap-2 w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all hover:shadow-blue-900/50 group/btn">
+                                        <a href="https://www.google.com/maps/search/Polda+NTB" target="_blank" class="flex items-center justify-center gap-2 w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl shadow-lg transition-all hover:shadow-blue-900/50 group/btn">
                                             <span class="material-icons text-sm group-hover/btn:animate-bounce">near_me</span>
-                                            Buka Peta Digital
+                                            Buka Peta Induk Polda NTB
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </section>

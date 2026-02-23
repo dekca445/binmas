@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SatkerController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\PesanController;
+
+Route::post('/kirim-pesan', [PesanController::class, 'kirim'])->name('pesan.kirim');
 
 // Route Index Berita (Daftar Semua Berita)
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
@@ -26,3 +29,13 @@ Route::controller(PublicController::class)->group(function () {
     Route::get('/galeri', 'galeri')->name('galeri');
 });
 Route::get('/satker/{slug}', [SatkerController::class, 'show'])->name('satker.show');
+
+Route::post('/log-security-activity', function (Illuminate\Http\Request $request) {
+    DB::table('activity_logs')->insert([
+        'ip_address' => $request->ip(),
+        'activity' => $request->activity,
+        'user_agent' => $request->userAgent(),
+        'created_at' => now(),
+    ]);
+    return response()->json(['status' => 'success']);
+});

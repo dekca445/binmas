@@ -40,7 +40,7 @@ class GalleryResource extends Resource
                     ->label('File Galeri')
                     ->directory('galleries')
                     ->acceptedFileTypes(['image/*', 'video/mp4', 'video/quicktime'])
-                    ->maxSize(51200) // 50MB
+                    ->maxSize(102400) // 100MB
                     ->required(),
 
                 Forms\Components\Textarea::make('description')
